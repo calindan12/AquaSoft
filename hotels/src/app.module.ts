@@ -6,6 +6,7 @@ import { HotelsController } from './hotelController';
 import { HotelsService } from './hotelService';
 import { Hotel } from './entities/hotelModel';
 import { AuthGuard } from './middleware/AuthGuard';
+import { Airport } from './entities/aeroportModel';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { AuthGuard } from './middleware/AuthGuard';
       autoLoadModels: true,
       synchronize: true,
     }),
-    SequelizeModule.forFeature([Hotel]),
+    SequelizeModule.forFeature([Hotel,Airport]),
     JwtModule.register({
       secret: 'SECRET_KEY', // Secretul pentru JWT
       signOptions: { expiresIn: '1h' }, // Durata de valabilitate a token-ului

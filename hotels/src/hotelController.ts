@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards, Query} from '@nestjs/common';
 import { HotelsService } from './hotelService';
 import { Hotel } from './entities/hotelModel';
 import { AuthGuard } from './middleware/AuthGuard';
@@ -16,6 +16,11 @@ export class HotelsController {
   @Get('/getHotel/:id')
   async findOne(@Param('id') id: number): Promise<Hotel> {
     return this.hotelsService.findOne(id);
+  }
+
+  @Get('closest-hotels')
+  async getClosestHotels(@Query('airportId') airportId: number) {
+    return await this.hotelsService.getClosestHotels(airportId);
   }
 
   @UseGuards(AuthGuard) // Protejează ruta cu JWT Guard
